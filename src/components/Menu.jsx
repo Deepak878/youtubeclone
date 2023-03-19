@@ -74,18 +74,27 @@ const Menu = ({ darkMode, setDarkMode }) => {
             MeTube
           </Logo>
         </Link>
-        <Item>
-          <HomeIcon />
-          Home
-        </Item>
-        <Item>
-          <HomeIcon />
-          Explore
-        </Item>
-        <Item>
-          <HomeIcon />
-          Subscriptions
-        </Item>
+        <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+          <Item>
+            <HomeIcon />
+            Home
+          </Item>
+        </Link>
+        <Link to="trends" style={{ textDecoration: "none", color: "inherit" }}>
+          <Item>
+            <HomeIcon />
+            Explore
+          </Item>
+        </Link>
+        <Link
+          to="subscriptions"
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <Item>
+            <HomeIcon />
+            Subscriptions
+          </Item>
+        </Link>
         <Hr />
         <Item>
           <HomeIcon />
