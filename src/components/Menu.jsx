@@ -3,6 +3,7 @@ import styled from "styled-components";
 import MeTube from "../img/logo.png";
 import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
+import { useSelector } from "react-redux";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 const Container = styled.div`
   flex: 1;
@@ -65,6 +66,8 @@ const Title = styled.h2`
   margin-bottom: 10px;
 `;
 const Menu = ({ darkMode, setDarkMode }) => {
+  const { currentUser } = useSelector((state) => state.user);
+
   return (
     <Container>
       <Wrapper>
@@ -105,14 +108,18 @@ const Menu = ({ darkMode, setDarkMode }) => {
           History
         </Item>
         <Hr />
-        <Login>
-          Sign in to like videos,comment and subscribe
-          <Link to="signin" style={{ textDecoration: "none" }}>
-            <Button>
-              <AccountCircleOutlinedIcon />
-            </Button>
-          </Link>
-        </Login>
+        {!currentUser && (
+          <>
+            <Login>
+              Sign in to like videos,comment and subscribe
+              <Link to="signin" style={{ textDecoration: "none" }}>
+                <Button>
+                  <AccountCircleOutlinedIcon />
+                </Button>
+              </Link>
+            </Login>
+          </>
+        )}
         <Hr />
         <Title>Best of METUBE</Title>
         <Item>
