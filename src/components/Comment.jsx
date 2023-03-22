@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-
+import { useState } from "react";
+import axios from "axios";
 const Container = styled.div`
   display: flex;
   gap: 10px;
@@ -31,20 +32,24 @@ const Text = styled.span`
   fontsize: 14px;
 `;
 
-const Comment = () => {
+const Comment = ({ comment }) => {
+  const [channel, setChannel] = useState({});
+
+  useEffect(() => {
+    const fetchComment = async () => {
+      const res = await axios.get(`/users/find/${comment.userId}`);
+      setChannel(res.data);
+    };
+    fetchComment();
+  }, [comment.userId]);
   return (
     <Container>
-      <Avatar src="https://yt3.ggpht.com/yti/APfAmoE-Q0ZLJ4vk3vqmV4Kwp0sbrjxLyB8Q4ZgNsiRH=s88-c-k-c0x00ffffff-no-rj-mo"></Avatar>
+      <Avatar src={channel.img}></Avatar>
       <Details>
         <Name>
-          John Doe <Date>1day ago</Date>
+          {channel.name} <Date>1day ago</Date>
         </Name>
-        <Text>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis
-          dolore illum optio non sequi et vitae. Harum repellendus vero aliquam
-          distinctio autem nisi placeat necessitatibus architecto cumque, illum,
-          doloribus assumenda?
-        </Text>
+        <Text>{comment.desc}</Text>
       </Details>
     </Container>
   );
